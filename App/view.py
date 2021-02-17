@@ -25,6 +25,7 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
+import time
 
 
 """
@@ -88,6 +89,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        t1 = time.process_time()
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
@@ -96,21 +98,32 @@ while True:
         print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
         print('Asociación de Géneros a Libros cargados: ' +
               str(lt.size(catalog['book_tags'])))
+        t2= time.process_time()
+        print("El tiempo de procesamiento es: {}.".format(t2-t1))
 
     elif int(inputs[0]) == 2:
+        t1 = time.process_time()
         number = input("Buscando los TOP ?: ")
         books = controller.getBestBooks(catalog, int(number))
         printBestBooks(books)
+        t2= time.process_time()
+        print("El tiempo de procesamiento es: {}.".format(t2-t1))
 
     elif int(inputs[0]) == 3:
+        t1 = time.process_time()
         authorname = input("Nombre del autor a buscar: ")
         author = controller.getBooksByAuthor(catalog, authorname)
         printAuthorData(author)
+        t2= time.process_time()
+        print("El tiempo de procesamiento es: {}.".format(t2-t1))
 
     elif int(inputs[0]) == 4:
+        t1 = time.process_time()
         label = input("Etiqueta a buscar: ")
         book_count = controller.countBooksByTag(catalog, label)
         print('Se encontraron: ', book_count, ' Libros')
+        t2= time.process_time()
+        print("El tiempo de procesamiento es: {}.".format(t2-t1))
 
     else:
         sys.exit(0)

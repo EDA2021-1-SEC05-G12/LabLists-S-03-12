@@ -235,7 +235,7 @@ def removeFirst(lst):
         Exception
     """
     try:
-        element = lst['elements'].pop(0)
+        element =    lst['elements'].pop(0)
         lst['size'] -= 1
         return element
     except Exception as exp:
